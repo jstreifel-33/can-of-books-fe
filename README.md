@@ -25,12 +25,13 @@ Technologies used:
 ## Change Log
 
 11-08-21 2:00PM - Initialized project and created readme.
+11-08-21 3:27 PM - Back end database set up
 
 ## Estimates
 
 | Feature # | Feature Name | Estimated Time | Start Time | End Time | Total Time |
 | 1 | Book Component | 02:00 | 00:00 PM | 00:00 PM | 00:00 |
-| 2 | Storage | 03:00 | 00:00 PM | 00:00 PM | 00:00 |
+| 2 | Storage | 03:00 | 02:00 PM | 03:27 PM | 0:00 |
 
 ## Credit and Collaborations
 
