@@ -3,8 +3,10 @@ import { Button } from 'react-bootstrap'
 
 export default class LoginButton extends Component {
 
+  
+
   handleClick = () =>{
-    
+    this.props.showForm();
   }
 
   render() {
