@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -9,6 +11,18 @@ class BestBooks extends React.Component {
   }
 
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
+  handleGetBooks = async (email) =>{
+    console.log('getting books...');
+    let results = await axios.get(`${process.env.REACT_APP_SERVER_URL}/books?email=${email}`);
+    console.log(results);
+    this.setState({
+      books: results.data
+    })
+  }
+
+  componentDidMount(){
+    this.handleGetBooks(this.props.email);
+  }
 
   render() {
 
@@ -21,7 +35,7 @@ class BestBooks extends React.Component {
         {this.state.books.length ? (
           <p>Book Carousel coming soon</p>
         ) : (
-          <h3>No Books Found :(</h3>
+          <h3>Your book collection is empty!</h3>
         )}
       </>
     )

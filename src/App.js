@@ -42,7 +42,7 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
-             { this.state.user ? <BestBooks/> : <Login loginHandler={this.loginHandler}/>}
+             { this.state.user ? <BestBooks email={this.state.email}/> : <Login loginHandler={this.loginHandler}/>}
             </Route>
             <Route path="/profile">
             <Profile userInfo = {this.state}/>
