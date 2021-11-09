@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Login from './Login';
 import BestBooks from './BestBooks';
+import Profile from './Profile.js'
 
 class App extends React.Component {
 
@@ -16,18 +17,21 @@ class App extends React.Component {
     super(props);
     this.state = {
       user: null,
+      email: null,
     }
   }
 
-  loginHandler = (user) => {
+  loginHandler = (user, email) => {
     this.setState({
       user,
+      email
     })
   }
 
   logoutHandler = () => {
     this.setState({
       user: null,
+      email: null
     })
   }
 
@@ -38,9 +42,11 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
-             { this.state.user ? <BestBooks/> : <Login />}
+             { this.state.user ? <BestBooks/> : <Login loginHandler={this.loginHandler}/>}
             </Route>
-            {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
+            <Route path="/profile">
+            <Profile userInfo = {this.state}/>
+            </Route>
           </Switch>
           <Footer />
         </Router>
