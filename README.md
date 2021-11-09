@@ -6,10 +6,12 @@ Can of Books
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-TBD
+
+Application for storing and displaying users' favorite books!
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
+Upon cloning, ensure all dependencies are installed using `npm i`. App is designed to talk to an external db, preferably hosted on Mongo Atlas.
 
 ## Architecture
 
@@ -26,12 +28,13 @@ Technologies used:
 
 11-08-21 2:00PM - Initialized project and created readme.
 11-08-21 3:27 PM - Back end database set up
+11-08-21 06:47 PM - Front end retrieves books based on user login and displays them.
 
 ## Estimates
 
 | Feature # | Feature Name | Estimated Time | Start Time | End Time | Total Time |
-| 1 | Book Component | 02:00 | 00:00 PM | 00:00 PM | 00:00 |
-| 2 | Storage | 03:00 | 02:00 PM | 03:27 PM | 0:00 |
+| 1 | Book Component | 02:00 | 03:27 PM | 06:47 PM | 03:20 |
+| 2 | Storage | 03:00 | 02:00 PM | 03:27 PM | 01:27 |
 
 ## Credit and Collaborations
 
