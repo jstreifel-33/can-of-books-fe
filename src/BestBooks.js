@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Button } from 'react-bootstrap';
+import BookFormModal from './BookFormModal.js';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      showModal: false
     }
   }
 
@@ -16,6 +19,21 @@ class BestBooks extends React.Component {
     this.setState({
       books: results.data
     })
+  }
+  handlePostBooks = async (bookObj) => {
+    try {
+      console.log(process.env.REACT_APP_SERVER_URL);
+      let res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/books`,bookObj);
+      console.log(res);
+      if (res.data) {
+        this.setState({books: [...this.state.books,res.data]})
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  toggleModal = () => {
+    this.setState({showModal: !this.state.showModal});
   }
 
   componentDidMount(){
@@ -29,7 +47,7 @@ class BestBooks extends React.Component {
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
+        <Button onClick={this.toggleModal}>Add Book</Button>
         {this.state.books.length ? (
           <Carousel >
             {this.state.books.map(book => (
@@ -49,6 +67,12 @@ class BestBooks extends React.Component {
         ) : (
           <h3>Your book collection is empty!</h3>
         )}
+        <BookFormModal
+          toggleModal={this.toggleModal}
+          show={this.state.showModal}
+          email={this.props.email}
+          handlePostBooks={this.handlePostBooks}
+        />
       </>
     )
   }
