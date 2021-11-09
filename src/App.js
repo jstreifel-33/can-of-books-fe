@@ -48,7 +48,7 @@ class App extends React.Component {
             <Profile userInfo = {this.state}/>
             </Route>
           </Switch>
-          <Footer />
+          <Footer/>
         </Router>
       </>
     )
