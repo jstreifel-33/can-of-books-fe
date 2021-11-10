@@ -14,12 +14,12 @@ export default class BookFormModal extends React.Component {
         }
         console.log(newBook);
         this.props.handlePostBooks(newBook);
-        this.props.toggleModal();
+        this.props.toggleAdd();
     }
 
     render() {
         return(
-            <Modal show={this.props.show} onHide={this.props.toggleModal}>
+            <Modal show={this.props.show} onHide={this.props.toggleAdd}>
                 <Modal.Header closeButton>
                 <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
