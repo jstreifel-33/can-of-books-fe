@@ -34,15 +34,30 @@ class BestBooks extends React.Component {
       console.error(err);
     }
   }
+
+  filterBooks = (id) => this.state.books.filter(book => book._id !== id); 
+
   handleDeleteBook = async (id) => {
     try{
       await axios.delete(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.email}`);
-      let filteredBooks = this.state.books.filter(book => book._id !== id);
+      //let filteredBooks = this.state.books.filter(book => book._id !== id);
+      let filteredBooks = this.filterBooks(id);
       this.setState({
         books: filteredBooks,
         carouselIndex: 0
       });
     }catch(err){
+      console.error(err);
+    }
+  }
+
+  handlePutBook = async (id,bookFromForm) => {
+    try {
+      let updatedBook = await axios.put(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.email}`,bookFromForm);
+      let filteredBooks = this.filterBooks(id);
+      filteredBooks.push(updatedBook);
+      this.setState({books: filteredBooks, carouselIndex: 0});
+    } catch(err) {
       console.error(err);
     }
   }
@@ -80,6 +95,7 @@ class BestBooks extends React.Component {
                 <h3>{book.title}</h3>
                 <p>{book.description}</p>
                 <Button onClick={() => this.handleDeleteBook(book._id)}>Delete from Collection</Button>
+                <Button onClick={() => this.handlePutBook(book._id)}>Update Book Info</Button>
               </Carousel.Caption>
             </Carousel.Item>
             ))}
