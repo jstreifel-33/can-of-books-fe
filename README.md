@@ -3,11 +3,11 @@
 Can of Books
 
 **Author**: Andrew Kim & Joseph Streifel
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.0
 
 ## Overview
 
-Application for storing and displaying users' favorite books!
+Application for storing and displaying users' favorite books! User is asked to provide email and username (username not validated) to view books.
 
 ## Getting Started
 
@@ -18,6 +18,8 @@ Upon cloning, ensure all dependencies are installed using `npm i`. App is design
 Technologies used:
 
 * React.js
+* MongoDB
+* Node.js
 * Express
 * Cors
 * Axios
@@ -30,6 +32,7 @@ Technologies used:
 11-08-21 3:27 PM - Back end database set up
 11-08-21 06:47 PM - Front end retrieves books based on user login and displays them.
 11-09-21 05:54 PM - App allows user to add and delete books from their list.
+11-10-21 03:09 PM - App allows user to update book entries using pop-up form.
 
 ## Estimates
 
@@ -39,6 +42,7 @@ Technologies used:
 | 2 | Storage | 03:00 | 02:00 PM | 03:27 PM | 01:27 |
 | 3 | Book POST | 1:30 | 1:30 PM | 2:54 PM | 01:24 |
 | 4 | Book DELETE | 2:00 | 3:05 PM | 5:54 PM | 02:54 |
+| 5 | Book PUT | 2:00 | 1:30 PM | 3:09 PM | 01:39 |
 
 ## Credit and Collaborations
 
