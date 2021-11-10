@@ -32,6 +32,15 @@ class BestBooks extends React.Component {
       console.error(err);
     }
   }
+  handleDeleteBook = async (id) => {
+    console.log("book id:", id)
+    console.log("email", this.props.email)
+    try{
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.email}`);
+    }catch(err){
+      console.error(err);
+    }
+  }
   toggleModal = () => {
     this.setState({showModal: !this.state.showModal});
   }
@@ -51,7 +60,7 @@ class BestBooks extends React.Component {
         {this.state.books.length ? (
           <Carousel >
             {this.state.books.map(book => (
-              <Carousel.Item key={book.title}>
+              <Carousel.Item key={book._id}>
               <img
                 className="d-block w-100"
                 src="https://via.placeholder.com/150"
@@ -60,6 +69,7 @@ class BestBooks extends React.Component {
               <Carousel.Caption>
                 <h3>{book.title}</h3>
                 <p>{book.description}</p>
+                <Button onClick={() => this.handleDeleteBook(book._id)}>Delete from Collection</Button>
               </Carousel.Caption>
             </Carousel.Item>
             ))}
