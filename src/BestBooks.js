@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Carousel, Button } from 'react-bootstrap';
+import { Container, Button, Carousel } from 'react-bootstrap';
 import BookFormModal from './BookFormModal.js';
+
 
 
 class BestBooks extends React.Component {
@@ -9,7 +10,8 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: [],
-      showModal: false
+      showModal: false,
+      carouselIndex: 0
     }
   }
 
@@ -32,8 +34,24 @@ class BestBooks extends React.Component {
       console.error(err);
     }
   }
+  handleDeleteBook = async (id) => {
+    try{
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.email}`);
+      let filteredBooks = this.state.books.filter(book => book._id !== id);
+      this.setState({
+        books: filteredBooks,
+        carouselIndex: 0
+      });
+    }catch(err){
+      console.error(err);
+    }
+  }
   toggleModal = () => {
     this.setState({showModal: !this.state.showModal});
+  }
+  carouselProgress = () => {
+    if(this.state.carouselIndex)
+    this.setState({carouselIndex: this.state.carouselIndex + 1} )
   }
 
   componentDidMount(){
@@ -41,25 +59,27 @@ class BestBooks extends React.Component {
   }
 
   render() {
-
+    
     /* TODO: render user's books in a Carousel */
-
+  
     return (
-      <>
+      <Container>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
         <Button onClick={this.toggleModal}>Add Book</Button>
         {this.state.books.length ? (
-          <Carousel >
+          <Carousel activeIndex={this.state.carouselIndex} onSelect={(e) => this.setState({carouselIndex: e})}>
             {this.state.books.map(book => (
-              <Carousel.Item key={book.title}>
+              <Carousel.Item key={book._id}>
               <img
-                className="d-block w-100"
+                className="d-block"
                 src="https://via.placeholder.com/150"
                 alt="book.title"
+                style={{height:"600px", width:"100%"}}
               />
               <Carousel.Caption>
                 <h3>{book.title}</h3>
                 <p>{book.description}</p>
+                <Button onClick={() => this.handleDeleteBook(book._id)}>Delete from Collection</Button>
               </Carousel.Caption>
             </Carousel.Item>
             ))}
@@ -73,7 +93,7 @@ class BestBooks extends React.Component {
           email={this.props.email}
           handlePostBooks={this.handlePostBooks}
         />
-      </>
+      </Container>
     )
   }
 }
