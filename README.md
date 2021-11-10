@@ -29,12 +29,15 @@ Technologies used:
 11-08-21 2:00PM - Initialized project and created readme.
 11-08-21 3:27 PM - Back end database set up
 11-08-21 06:47 PM - Front end retrieves books based on user login and displays them.
+11-09-21 05:54 PM - App allows user to add and delete books from their list.
 
 ## Estimates
 
 | Feature # | Feature Name | Estimated Time | Start Time | End Time | Total Time |
 | 1 | Book Component | 02:00 | 03:27 PM | 06:47 PM | 03:20 |
 | 2 | Storage | 03:00 | 02:00 PM | 03:27 PM | 01:27 |
+| 3 | Book POST | 1:30 | 1:30 PM | 2:54 PM | 01:24 |
+| 4 | Book DELETE | 2:00 | 3:05 PM | 5:54 PM | 02:54 |
 
 ## Credit and Collaborations
 
