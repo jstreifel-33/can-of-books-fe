@@ -34,6 +34,7 @@ Technologies used:
 ## Estimates
 
 | Feature # | Feature Name | Estimated Time | Start Time | End Time | Total Time |
+|-----|-----|-----|-----|-----|-----|
 | 1 | Book Component | 02:00 | 03:27 PM | 06:47 PM | 03:20 |
 | 2 | Storage | 03:00 | 02:00 PM | 03:27 PM | 01:27 |
 | 3 | Book POST | 1:30 | 1:30 PM | 2:54 PM | 01:24 |
