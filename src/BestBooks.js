@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Button, Carousel } from 'react-bootstrap';
 import BookFormModal from './BookFormModal.js';
 import BookUpdateModal from './BookUpdateModal.js';
+import { withAuth0 } from '@auth0/auth0-react';
 
 
 
@@ -125,4 +126,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);
