@@ -9,7 +9,8 @@ import {
 } from "react-router-dom";
 import Login from './Login';
 import BestBooks from './BestBooks';
-import Profile from './Profile.js'
+import Profile from './Profile.js';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends React.Component {
 
@@ -42,7 +43,7 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
-             { this.state.user ? <BestBooks email={this.state.email}/> : <Login loginHandler={this.loginHandler}/>}
+             { this.props.auth0.isAuthenticated ? <BestBooks email={this.state.email}/> : <Login loginHandler={this.loginHandler}/>}
             </Route>
             <Route path="/profile">
             <Profile userInfo = {this.state}/>
@@ -55,4 +56,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAuth0(App);
