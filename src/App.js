@@ -13,12 +13,12 @@ import Profile from './Profile.js';
 import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends React.Component {
-
+  /*
   constructor(props) {
     super(props);
     this.state = {
       user: null,
-      email: null,
+      email: this.props.auth0.user.email || null,
     }
   }
 
@@ -35,18 +35,18 @@ class App extends React.Component {
       email: null
     })
   }
-
+*/
   render() {
     return (
       <>
         <Router>
-          <Header user={this.state.user} onLogout={this.logoutHandler} />
+          <Header />
           <Switch>
             <Route exact path="/">
-             { this.props.auth0.isAuthenticated ? <BestBooks email={this.state.email}/> : <Login loginHandler={this.loginHandler}/>}
+             { this.props.auth0.isAuthenticated ? <BestBooks email={this.props.auth0.user.email}/> : <Login />}
             </Route>
             <Route path="/profile">
-            <Profile userInfo = {this.state}/>
+            <Profile />
             </Route>
           </Switch>
           <Footer/>
