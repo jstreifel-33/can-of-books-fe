@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Button, Carousel } from 'react-bootstrap';
 import BookFormModal from './BookFormModal.js';
 import BookUpdateModal from './BookUpdateModal.js';
+import { withAuth0 } from '@auth0/auth0-react';
 
 
 
@@ -18,16 +19,39 @@ class BestBooks extends React.Component {
   }
 
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
+  getConfig = async (method) => {
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      console.log(res);
+      console.log(jwt);
+      const config = {
+        headers: { "Authoriztion": `Bearer ${jwt}`},
+        method: method,
+        baseURL: process.env.REACT_APP_SERVER_URL
+      }
+      return config;
+    } 
+  }
   handleGetBooks = async (email) => {
-    let results = await axios.get(`${process.env.REACT_APP_SERVER_URL}/books?email=${email}`);
+    let config = await this.getConfig('get');
+    //let results = await axios.get(`${process.env.REACT_APP_SERVER_URL}/books?email=${email}`,config);
+    //let results = await axios(`${process.env.REACT_APP_SERVER_URL}/books?email=${email}`,config);
+    config.url = `/books?email=${email}`
+    let results = await axios(config);
+
     this.setState({
       books: results.data
     })
   }
   handlePostBooks = async (bookObj) => {
+    let config = await this.getConfig('post');
+    config.url = '/books';
+    config.data = bookObj;
     try {
-      console.log(process.env.REACT_APP_SERVER_URL);
-      let res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/books`, bookObj);
+      console.log(config.baseUrl);
+      //let res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/books`,bookObj,config);
+      let res = await axios(config);
       console.log(res);
       if (res.data) {
         this.setState({ books: [...this.state.books, res.data] })
@@ -40,8 +64,11 @@ class BestBooks extends React.Component {
   filterBooks = (id) => this.state.books.filter(book => book._id !== id);
 
   handleDeleteBook = async (id) => {
+    let config = await this.getConfig('delete');
+    config.url = `/books/${id}?email=${this.props.auth0.user.email}`;
     try {
-      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.email}`);
+      //await axios.delete(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.auth0.user.email}`);
+      await axios(config);
       //let filteredBooks = this.state.books.filter(book => book._id !== id);
       let filteredBooks = this.filterBooks(id);
       this.setState({
@@ -54,8 +81,12 @@ class BestBooks extends React.Component {
   }
 
   handlePutBook = async (id, bookFromForm) => {
+    let config = await this.getConfig('put');
+    config.url = `/books/${id}?email=${this.props.email}`;
+    config.data = bookFromForm;
     try {
-      let updatedBook = await axios.put(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.email}`, bookFromForm);
+      //let updatedBook = await axios.put(`${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.email}`, bookFromForm);
+      let updatedBook = await axios(config);
       let filteredBooks = this.filterBooks(id);
       filteredBooks.push(updatedBook.data);
       this.setState({ books: filteredBooks, carouselIndex: 0 });
@@ -73,9 +104,9 @@ class BestBooks extends React.Component {
     if (this.state.carouselIndex)
       this.setState({ carouselIndex: this.state.carouselIndex + 1 })
   }
-
+  
   componentDidMount() {
-    this.handleGetBooks(this.props.email);
+    this.handleGetBooks(this.props.auth0.user.email);
   }
 
   render() {
@@ -125,4 +156,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);
