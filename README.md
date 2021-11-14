@@ -7,7 +7,7 @@ Can of Books
 
 ## Overview
 
-Application for storing and displaying users' favorite books! User is asked to provide email and username (username not validated) to view books.
+Application for storing and displaying users' favorite books! User is asked to create an account or login with Google to view and edit book list.
 
 ## Getting Started
 
@@ -25,6 +25,7 @@ Technologies used:
 * Axios
 * dotenv
 * Mongoose
+* Auth0
 
 ## Change Log
 
@@ -33,6 +34,7 @@ Technologies used:
 11-08-21 06:47 PM - Front end retrieves books based on user login and displays them.
 11-09-21 05:54 PM - App allows user to add and delete books from their list.
 11-10-21 03:09 PM - App allows user to update book entries using pop-up form.
+11-13-21 05:10 PM - Updated with Auth0 integration, allowing user to login with Google or create account.
 
 ## Estimates
 
@@ -43,6 +45,7 @@ Technologies used:
 | 3 | Book POST | 1:30 | 1:30 PM | 2:54 PM | 01:24 |
 | 4 | Book DELETE | 2:00 | 3:05 PM | 5:54 PM | 02:54 |
 | 5 | Book PUT | 2:00 | 1:30 PM | 3:09 PM | 01:39 |
+| 6 | Auth 0 | 4:00 | 12:00 PM | 5:10 PM | 05:10 |
 
 ## Credit and Collaborations
 
